@@ -2,7 +2,7 @@ const
     url = "https://api2.minhablaze.com.br/api/v1/result/double"
 var
     lem = (el) => {
-        return document.querySelector(el)
+        return document.querySelector(el);
     },
 sugestao = lem('.sugestao'),
     startRobo = () => {
@@ -34,7 +34,7 @@ sugestao = lem('.sugestao'),
                         cor = 'BRANCO'
                         break
                 }
-                lem('.sugestao').innerHTML = "SUGESTÃO PARA:" = cor
+                lem('.sugestao').innerHTML = cor
             }
         )
         setTimeout(() => { startRobo() }, 3000)
