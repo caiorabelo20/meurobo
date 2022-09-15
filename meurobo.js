@@ -1,12 +1,12 @@
 const
     url = "https://api2.minhablaze.com.br/api/v1/result/double"
 var
-aux = 1
-estrategia = 0
+    aux = 1
+apostando = 0
 estrategia_branco = 0
-    lem = (el) => {
-        return document.querySelector(el);
-    },
+lem = (el) => {
+    return document.querySelector(el);
+},
     sugestao = lem('.sugestao'),
     startRobo = () => {
 
@@ -24,38 +24,26 @@ estrategia_branco = 0
                 resultados = r.results
                 tamanho = resultados.length - 1
                 dados = resultados.color
-                if (estrategia == 1) {
-                    if (cor_num == resultados[(tamanho)].color) {
+                if(apostando == 1 && id_aposta1 != resultados[tamanho].id){
+                    if(num_cor == resultados[tamanho].color){
                         acerto = 1
-                        estrategia_branco = 0
-                        estrategia = 0
-                    } else {
-                        acerto = 0
-                    }
-                }
-                if (((resultados[(tamanho - 1)].color == 0) && (resultados[(tamanho)].color != 0)) || estrategia_branco == 1) {
-                    estrategia = 1
-                    if (estrategia_branco == 0) {
-                        if (resultados[(tamanho)].color == 1) {
-                            cor = 2
-                        } else {
-                            cor = 1
-                        }
+                        apostando = 0
                     }else{
-                        if (resultados[(tamanho-1)].color == 1) {
-                            cor = 2
-                        } else {
-                            cor = 1
-                        }
+                        acerto = 0
+                    apostando = 2
+                    id_aposta2 = resultados[tamanho].id
+                }else if(apostando == 2 && id_aposta2 != resultados[tamanho].id){
+
+                }else if ((resultados[(tamanho - 1)].color == 1) && (resultados[(tamanho)].color != 1)) {
+                    apostando = 1
+                    id_aposta1 = resultados[tamanho].id
+                    if (resultados[(tamanho - 1)].color == 0) {
+                        num_cor = 2
+                    } else {
+                        num_cor = 0
                     }
-                }
-                cor_num = cor
-                    // 
-                    // Aplicar a logica de aposta (valor de cada aposta)
-                    //
                 //converter valores das cores
-                if (estrategia == 1) {
-                    switch (cor) {
+                    switch (num_cor) {
                         case 1:
                             cor = 'VERMELHO'
                             break
@@ -69,10 +57,40 @@ estrategia_branco = 0
                 } else {
                     cor = 'Nada'
                 }
-                lem('.sugestao').innerHTML = aux
+                lem('.sugestao').innerHTML = apostando
             }
         )
         setTimeout(() => { startRobo() }, 3000)
     }
 
 startRobo()
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                if (estrategia == 1) {
+//                    if (cor_num == resultados[(tamanho)].color) {
+//                        acerto = 1
+//                        estrategia_branco = 0
+//                        estrategia = 0
+//                    } else {
+//                        acerto = 0
+//                    }
+//                }
+
+
+//                    if (estrategia_branco == 0) {
+//                        if (resultados[(tamanho)].color == 1) {
+//                           cor = 2
+//                        } else {
+//                            cor = 1
+//                        }
