@@ -5,6 +5,7 @@ var
 apostando = 0
 acerto1 = 0
 acerto2 = 0
+perdas = 0
 estrategia_branco = 0
 lem = (el) => {
     return document.querySelector(el);
@@ -29,10 +30,9 @@ lem = (el) => {
                 if(apostando == 1 && id_aposta1 != resultados[tamanho].id){
                     // entra nesse if quando a jogada 1 foi realizada
                     if(num_cor == resultados[tamanho].color){
-                        acerto1 = 1
+                        acerto1 = acerto1 + 1
                         apostando = 0
                     }else{
-                        acerto1 = 0
                         apostando = 2
                         id_aposta2 = resultados[tamanho].id
                     }
@@ -43,15 +43,13 @@ lem = (el) => {
                     //entra nesse if quando a jogada 2 for realizada. Aqui a variavel "apostando" volta a ser zero, reiniciando o bot
 
                     if(num_cor == resultados[tamanho].color){
-                        acerto2 = 1
+                        acerto2 = acerto2 + 1
                     }else{
-                        acerto2 = 0
+                        perdas = perdas + 1
                     }
                         apostando = 0                 
                 }else if ((resultados[(tamanho - 1)].color == 0) && (resultados[(tamanho)].color != 0)) {
                     // Estrategia da cor branca
-                    acerto1 = 0
-                    acerto2 = 0
                     apostando = 1
                     id_aposta1 = resultados[tamanho].id
                     if (resultados[(tamanho)].color == 1) {
@@ -73,8 +71,6 @@ lem = (el) => {
                     }
                 }else if (resultados[tamanho].color != resultados[(tamanho - 1)].color && (resultados[(tamanho - 1)].color == resultados[(tamanho - 2)].color && resultados[(tamanho - 2)].color == resultados[(tamanho - 3)].color && resultados[(tamanho - 3)].color == resultados[(tamanho - 4)].color)) {
                     // Estrategia sequencia de 4 ou mais da mesma cor
-                    acerto1 = 0
-                    acerto2 = 0
                     apostando = 1
                     id_aposta1 = resultados[tamanho].id
                     num_cor = resultados[(tamanho - 1)].color
@@ -90,10 +86,27 @@ lem = (el) => {
                             cor = 'BRANCO'
                             break
                     }
+                }else if ((resultados[tamanho].color == resultados[(tamanho - 1)].color && resultados[(tamanho - 1)].color == resultados[(tamanho - 3)].color) && (resultados[(tamanho - 2)].color == resultados[(tamanho - 4)].color) && (resultados[(tamanho - 1)].color != resultados[(tamanho - 2)].color)) {
+                    // Estrategia quebra de alternancia de 4 ou mais amostras
+                    apostando = 1
+                    id_aposta1 = resultados[tamanho].id
+                    num_cor = resultados[(tamanho - 2)].color
+                //converter valores das cores
+                    switch (num_cor) {
+                        case 1:
+                            cor = 'VERMELHO'
+                            break
+                        case 2:
+                            cor = 'PRETO'
+                            break
+                        case 0:
+                            cor = 'BRANCO'
+                            break
+                    }
                 }else {
                     cor = 'Nada'
                 }
-                lem('.sugestao').innerHTML = [cor,apostando,acerto1,acerto2]
+                lem('.sugestao').innerHTML = [cor,apostando,acerto1,acerto2,perdas]
             }
         )
         setTimeout(() => { startRobo() }, 3000)
