@@ -5,6 +5,8 @@ var
 apostando = 0
 acerto1 = 0
 acerto2 = 0
+acerto1_branco = 0
+acerto2_branco = 0
 perdas = 0
 estrategia_branco = 0
 lem = (el) => {
@@ -32,6 +34,9 @@ lem = (el) => {
                     if(num_cor == resultados[tamanho].color){
                         acerto1 = acerto1 + 1
                         apostando = 0
+                    }else if(resultados[tamanho].color == 0){
+                        acerto1_branco = acerto1_branco + 1
+                        apostando = 0
                     }else{
                         apostando = 2
                         id_aposta2 = resultados[tamanho].id
@@ -44,6 +49,9 @@ lem = (el) => {
 
                     if(num_cor == resultados[tamanho].color){
                         acerto2 = acerto2 + 1
+                    }else if(resultados[tamanho].color == 0){
+                        acerto2_branco = acerto2_branco + 1
+                        apostando = 0
                     }else{
                         perdas = perdas + 1
                     }
@@ -69,7 +77,7 @@ lem = (el) => {
                             cor = 'BRANCO'
                             break
                     }
-                }else if (resultados[tamanho].color != resultados[(tamanho - 1)].color && (resultados[(tamanho - 1)].color == resultados[(tamanho - 2)].color && resultados[(tamanho - 2)].color == resultados[(tamanho - 3)].color && resultados[(tamanho - 3)].color == resultados[(tamanho - 4)].color)) {
+                }else if (resultados[tamanho].color != resultados[(tamanho - 1)].color && resultados[tamanho].color != 0 && (resultados[(tamanho - 1)].color == resultados[(tamanho - 2)].color && resultados[(tamanho - 2)].color == resultados[(tamanho - 3)].color && resultados[(tamanho - 3)].color == resultados[(tamanho - 4)].color)) {
                     // Estrategia sequencia de 4 ou mais da mesma cor
                     apostando = 1
                     id_aposta1 = resultados[tamanho].id
@@ -86,7 +94,7 @@ lem = (el) => {
                             cor = 'BRANCO'
                             break
                     }
-                }else if ((resultados[tamanho].color == resultados[(tamanho - 1)].color && resultados[(tamanho - 1)].color == resultados[(tamanho - 3)].color) && (resultados[(tamanho - 2)].color == resultados[(tamanho - 4)].color) && (resultados[(tamanho - 1)].color != resultados[(tamanho - 2)].color)) {
+                }else if ((resultados[tamanho].color != 0) && (resultados[tamanho].color == resultados[(tamanho - 1)].color && resultados[(tamanho - 1)].color == resultados[(tamanho - 3)].color) && (resultados[(tamanho - 2)].color == resultados[(tamanho - 4)].color) && (resultados[(tamanho - 1)].color != resultados[(tamanho - 2)].color)) {
                     // Estrategia quebra de alternancia de 4 ou mais amostras
                     apostando = 1
                     id_aposta1 = resultados[tamanho].id
@@ -106,7 +114,7 @@ lem = (el) => {
                 }else {
                     cor = 'Nada'
                 }
-                lem('.sugestao').innerHTML = [cor,apostando,acerto1,acerto2,perdas]
+                lem('.sugestao').innerHTML = [cor, " Aposta: ", apostando, " Acertos de primeira: ", acerto1, " Acertos de segunda: ", acerto2, " Acertos branco de primeira: ", acerto1_branco, " Acertos branco de segunda: ", acerto2_branco, " Perdas: ", perdas]
             }
         )
         setTimeout(() => { startRobo() }, 3000)
