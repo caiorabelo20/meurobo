@@ -229,10 +229,10 @@ lem = (el) => {
                 }
                 
                 
-//                lem('.sugestao').innerHTML = [cor, " Aposta: ", apostando, " Acertos de primeira: ", acerto1, " Acertos de segunda: ", acerto2, " Acertos branco de primeira: ", acerto1_branco, " Acertos branco de segunda: ", acerto2_branco, " Perdas: ", perdas]
+                lem('.sugestao').innerHTML = ["Aposte em: "+ cor + "<br>Aposta: "+ apostando+ "<br>Acertos de primeira: "+ acerto1+ "<br>Acertos de segunda: "+ acerto2 + "<br>Acertos branco de primeira: "+ acerto1_branco+ "<br>Acertos branco de segunda: "+ acerto2_branco + "<br>Perdas: "+ perdas]
  //                 lem('.sugestao').innerHTML = [ "Branco Principal: ",analise_branco1p, "Branco1 proteçao: ",analise_branco1p_protecao,"Branco Gale: ",analise_branco2p,"Branco Gale proteçao: ", analise_branco2p_protecao,"Branco Loss: ",branco_loss]
  //                 lem('.sugestao').innerHTML = [ "TBT Principal: ",analise_tbt1p, "TBT1 proteçao: ",analise_tbt1p_protecao,"TBT Gale: ",analise_tbt2p,"TBT Gale proteçao: ", analise_tbt2p_protecao,"TBT Loss: ",tbt_loss]
-                  lem('.sugestao').innerHTML = [ "Alternador Principal:" + analise_alternador1p + "<br>Alternador1 proteçao: " + analise_alternador1p_protecao + "<br>Alternador Gale: " + analise_alternador2p + "<br>Alternador Gale proteçao: " + analise_alternador2p_protecao + "<br>Alternador Loss: " + alternador_loss]
+ //                 lem('.sugestao').innerHTML = [ "Alternador Principal:" + analise_alternador1p + "<br>Alternador1 proteçao: " + analise_alternador1p_protecao + "<br>Alternador Gale: " + analise_alternador2p + "<br>Alternador Gale proteçao: " + analise_alternador2p_protecao + "<br>Alternador Loss: " + alternador_loss]
 //                  lem('.sugestao').innerHTML = [a]
             }
         )
